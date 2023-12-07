@@ -44,6 +44,13 @@ repositories {
 jar {
     baseName = 'jb-hello-world'
     version =  '0.1.0'
+
+    manifest {
+        attributes "Main-Class": "hello.HelloWorld"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 // end::jar[]
 
@@ -58,7 +65,4 @@ dependencies {
 // end::dependencies[]
 
 // tag::wrapper[]
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
-}
 // end::wrapper[]
